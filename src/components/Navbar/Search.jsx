@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { IoIosSearch } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
 import { getCategories, getProducts } from "../../libs/fetchingApi";
+import { motion } from "framer-motion";
 
 const Search = () => {
   const navigate = useNavigate();
@@ -80,6 +81,11 @@ const Search = () => {
     };
   }, [suggestionBox]);
 
+  const container = {
+    hidden: { scale: 0 },
+    show: { scale: 1 },
+  };
+
   return (
     <div ref={suggestionBoxRef}>
       <form
@@ -102,11 +108,16 @@ const Search = () => {
       </form>
 
       {suggestionBox && (
-        <div className=" bg-slate-100 rounded-lg absolute md:-ml-16 shadow-md mt-1 p-3">
+        <motion.div
+          className=" bg-slate-100 rounded-lg absolute md:-ml-16 shadow-md mt-1 p-3"
+          variants={container}
+          initial="hidden"
+          animate="show"
+        >
           <h2 className="text-sm lg:text-base border-b-2 pb-2">
             Popular Categories
           </h2>
-          <div className="grid grid-cols-2 gap-2 mt-2">
+          <motion.div className="grid grid-cols-2 gap-2 mt-2">
             {populerCategories.map((category, index) => (
               <Link
                 key={index}
@@ -126,8 +137,8 @@ const Search = () => {
                 </div>
               </Link>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
     </div>
   );

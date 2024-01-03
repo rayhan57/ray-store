@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
+import { motion } from "framer-motion";
 
 const SortProducts = ({ sortOptions, setSortOptions }) => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -35,6 +36,16 @@ const SortProducts = ({ sortOptions, setSortOptions }) => {
     setShowDropdown(false);
   };
 
+  const container = {
+    hidden: { y: -30 },
+    show: { y: 0 },
+  };
+
+  const list = {
+    hidden: { y: -30 },
+    show: { y: 0 },
+  };
+
   return (
     <div className="relative" ref={dropdownRef}>
       <button
@@ -44,9 +55,14 @@ const SortProducts = ({ sortOptions, setSortOptions }) => {
         Sort by {sortByName()} <IoIosArrowDown />
       </button>
       {showDropdown && (
-        <div className="text-sm absolute w-full bg-slate-100 rounded-lg shadow overflow-hidden mt-1">
+        <motion.div
+          className="text-sm absolute w-full bg-slate-100 rounded-lg shadow overflow-hidden mt-1"
+          variants={container}
+          initial="hidden"
+          animate="show"
+        >
           <ul>
-            <li>
+            <motion.li variants={list}>
               <button
                 className="hover:bg-slate-200 w-full py-1 text-left pl-2"
                 onClick={() =>
@@ -59,8 +75,8 @@ const SortProducts = ({ sortOptions, setSortOptions }) => {
               >
                 Newest
               </button>
-            </li>
-            <li>
+            </motion.li>
+            <motion.li variants={list}>
               <button
                 className="hover:bg-slate-200 w-full py-1 text-left pl-2"
                 onClick={() =>
@@ -73,8 +89,8 @@ const SortProducts = ({ sortOptions, setSortOptions }) => {
               >
                 Old
               </button>
-            </li>
-            <li>
+            </motion.li>
+            <motion.li variants={list}>
               <button
                 className="hover:bg-slate-200 w-full py-1 text-left pl-2"
                 onClick={() =>
@@ -86,8 +102,8 @@ const SortProducts = ({ sortOptions, setSortOptions }) => {
               >
                 Highest Price
               </button>
-            </li>
-            <li>
+            </motion.li>
+            <motion.li variants={list}>
               <button
                 className="hover:bg-slate-200 w-full py-1 text-left pl-2"
                 onClick={() =>
@@ -99,9 +115,9 @@ const SortProducts = ({ sortOptions, setSortOptions }) => {
               >
                 Lowest Price
               </button>
-            </li>
+            </motion.li>
           </ul>
-        </div>
+        </motion.div>
       )}
     </div>
   );
