@@ -28,7 +28,7 @@ const HomePage = () => {
 
   return (
     <>
-      <div className="container py-1">
+      <div className="container pb-5">
         <Navbar />
 
         {products.length > 0 ? (

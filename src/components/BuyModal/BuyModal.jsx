@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { RESET_CART, SET_ORDER_DETAILS } from "../../state/cartSlice";
 import { format } from "date-fns";
+import { motion } from "framer-motion";
 
 const BuyModal = ({
   cartProduct,
@@ -84,7 +85,11 @@ const BuyModal = ({
   return (
     <>
       {showBuyModal && (
-        <div className="absolute top-0 md:left-1/4 lg:left-1/3 lg:top-20 z-20 p-4 w-full max-w-md max-h-full">
+        <motion.div
+          className="absolute top-0 md:left-1/4 lg:left-1/3 lg:top-20 z-20 p-4 w-full max-w-md max-h-full"
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+        >
           <div className="relative bg-slate-100 rounded-lg shadow">
             <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
               <h3 className="font-semibold">Order Detail</h3>
@@ -178,7 +183,7 @@ const BuyModal = ({
               </button>
             </form>
           </div>
-        </div>
+        </motion.div>
       )}
     </>
   );

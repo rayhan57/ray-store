@@ -1,14 +1,27 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/");
+    window.scroll({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
-    <div className="bg-green-700 p-2 mt-5">
+    <div className="bg-green-700 p-2">
       <p className="text-center text-white text-sm">
         Copyright ©2023{" "}
-        <Link to={"/"} className="text-slate-300 hover:text-slate-100">
+        <button
+          className="text-slate-300 hover:text-slate-100"
+          onClick={handleClick}
+        >
           RayStore
-        </Link>
+        </button>
       </p>
     </div>
   );
